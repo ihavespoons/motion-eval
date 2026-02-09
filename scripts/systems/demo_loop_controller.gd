@@ -23,10 +23,10 @@ const ESCALATION_STEPS: Array[Dictionary] = [
 	{"setting": "head_bob", "value": 1, "label": "Head Bob → Subtle"},
 	{"setting": "mouse_smoothing", "value": 1, "label": "Mouse Smoothing → Low"},
 	{"setting": "reference_point", "value": 1, "label": "Reference Point → Weapon"},
-	{"setting": "motion_blur", "value": 1, "label": "Motion Blur → Low"},
+	{"setting": "movement_speed", "value": 2, "label": "Movement Speed → Fast"},
 	{"setting": "chromatic_aberration", "value": true, "label": "Chromatic Aberration → On"},
 	{"setting": "dof", "value": 1, "label": "Depth of Field → Subtle"},
-	{"setting": "movement_speed", "value": 2, "label": "Movement Speed → Fast"},
+	{"setting": "motion_blur", "value": 1, "label": "Motion Blur → Low"},
 	{"setting": "head_bob", "value": 2, "label": "Head Bob → Aggressive"},
 	{"setting": "motion_blur", "value": 2, "label": "Motion Blur → High"},
 	{"setting": "fov", "value": 60.0, "label": "FOV → 60°"},
@@ -94,6 +94,7 @@ func start_demo() -> void:
 	_player.demo_direction = Vector3.ZERO
 
 	SettingsManager.reset_all()
+	SettingsManager.movement_speed = 0  # Start at Slow (3.0 m/s)
 	_active_effects.clear()
 	current_step = 0
 	step_timer = 0.0
