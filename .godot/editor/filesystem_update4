@@ -2,3 +2,4 @@ res://scripts/player/player_controller.gd
 res://scripts/ui/debug_overlay.gd
 res://scripts/systems/demo_loop_controller.gd
 res://scenes/main.tscn
+res://scripts/systems/settings_manager.gd

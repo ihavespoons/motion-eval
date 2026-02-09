@@ -23,6 +23,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+# --- Resolution ---
+func _on_resolution_option_item_selected(index: int) -> void:
+	SettingsManager.resolution = index
+
+# --- Fullscreen ---
+func _on_fullscreen_check_toggled(toggled_on: bool) -> void:
+	SettingsManager.fullscreen = toggled_on
+
 # --- FOV ---
 func _on_fov_slider_value_changed(value: float) -> void:
 	SettingsManager.fov = value
@@ -74,6 +82,8 @@ func _on_reset_button_pressed() -> void:
 	_sync_ui_to_settings()
 
 func _sync_ui_to_settings() -> void:
+	$Panel/Scroll/VBox/Resolution/Option.selected = SettingsManager.resolution
+	$Panel/Scroll/VBox/Fullscreen/Check.button_pressed = SettingsManager.fullscreen
 	$Panel/Scroll/VBox/FOV/Slider.value = SettingsManager.fov
 	$Panel/Scroll/VBox/FOV/Value.text = "%d°" % int(SettingsManager.fov)
 	$Panel/Scroll/VBox/HeadBob/Option.selected = SettingsManager.head_bob

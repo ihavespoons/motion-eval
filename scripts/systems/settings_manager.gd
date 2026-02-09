@@ -77,10 +77,50 @@ var reference_point: int = 0:
 		reference_point = clampi(v, 0, 2)
 		reference_point_changed.emit(reference_point)
 
+# Resolution: 0=1280x720, 1=1920x1080, 2=2560x1440, 3=3840x2160
+signal resolution_changed(value: int)
+var resolution: int = 1:
+	set(v):
+		resolution = clampi(v, 0, 3)
+		_apply_resolution()
+		resolution_changed.emit(resolution)
+
+# Fullscreen
+signal fullscreen_changed(value: bool)
+var fullscreen: bool = false:
+	set(v):
+		fullscreen = v
+		_apply_fullscreen()
+		fullscreen_changed.emit(fullscreen)
+
+const RESOLUTION_VALUES: Array[Vector2i] = [
+	Vector2i(1280, 720),
+	Vector2i(1920, 1080),
+	Vector2i(2560, 1440),
+	Vector2i(3840, 2160),
+]
+
 const SPEED_VALUES := [3.0, 5.5, 10.0]
 
 func get_speed_value() -> float:
 	return SPEED_VALUES[movement_speed]
+
+func get_resolution_value() -> Vector2i:
+	return RESOLUTION_VALUES[resolution]
+
+func _apply_resolution() -> void:
+	if fullscreen:
+		return
+	var size := RESOLUTION_VALUES[resolution]
+	get_window().size = size
+	get_window().move_to_center()
+
+func _apply_fullscreen() -> void:
+	if fullscreen:
+		get_window().mode = Window.MODE_FULLSCREEN
+	else:
+		get_window().mode = Window.MODE_WINDOWED
+		_apply_resolution()
 
 func reset_all() -> void:
 	fov = 90.0
