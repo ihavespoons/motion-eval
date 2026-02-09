@@ -176,9 +176,15 @@ size = Vector3(10.253906, 0.2, 6)
 material = SubResource("Material_floor")
 
 [node name="Junction_Ceiling" type="CSGBox3D" parent="IndoorSection"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.001953, 3, -13.428955)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.005725, 3.010019, -13.428384)
 use_collision = true
 size = Vector3(9.996094, 0.2, 3.1420898)
+material = SubResource("Material_ceiling")
+
+[node name="Junction_Ceiling" type="CSGBox3D" parent="IndoorSection/Junction_Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9959059, 0.0014998913, 2.754364)
+use_collision = true
+size = Vector3(6.014221, 0.2, 3.0826416)
 material = SubResource("Material_ceiling")
 
 [node name="Junction_WallBack" type="CSGBox3D" parent="IndoorSection"]
@@ -188,9 +194,9 @@ size = Vector3(8, 3, 0.3)
 material = SubResource("Material_wall")
 
 [node name="Junction_WallFront_Left" type="CSGBox3D" parent="IndoorSection"]
-transform = Transform3D(0.8110434, 0, -0.584986, 0, 1, 0, 0.584986, 0, 0.8110434, 0.33527458, 1.5, -12.656239)
+transform = Transform3D(0.8110434, 0, -0.584986, 0, 1, 0, 0.584986, 0, 0.8110434, 1.047576, 1.5, -13.506488)
 use_collision = true
-size = Vector3(0.3, 3, 6)
+size = Vector3(0.3, 3, 3.9033203)
 material = SubResource("Material_wall")
 
 [node name="Junction_WallRight_Top" type="CSGBox3D" parent="IndoorSection"]
@@ -200,7 +206,7 @@ size = Vector3(0.3, 3, 1)
 material = SubResource("Material_wall")
 
 [node name="Junction_WallRight_Bottom" type="CSGBox3D" parent="IndoorSection"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.5, -9.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.5, -9.639171)
 use_collision = true
 size = Vector3(0.3, 3, 1)
 material = SubResource("Material_wall")
