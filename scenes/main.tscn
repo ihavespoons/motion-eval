@@ -250,7 +250,7 @@ shadow_enabled = true
 omni_range = 6.0
 
 [node name="Crate2" type="CSGBox3D" parent="IndoorSection"]
-transform = Transform3D(0.924, 0, 0.383, 0, 1, 0, -0.383, 0, 0.924, 4.5, 0.35, -11)
+transform = Transform3D(0.924, 0, 0.383, 0, 1, 0, -0.383, 0, 0.924, 4.743581, 0.35, -11)
 use_collision = true
 size = Vector3(0.7, 0.7, 0.7)
 material = SubResource("Material_crate")
