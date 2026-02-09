@@ -1,0 +1,298 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdebug001"]
+
+[ext_resource type="Script" path="res://scripts/ui/debug_overlay.gd" id="1_overlay"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.1, 0.1, 0.12, 0.85)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+
+[node name="DebugOverlay" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_overlay")
+
+[node name="FPSLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 30.0
+text = "FPS: 0"
+horizontal_alignment = 2
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -370.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Scroll" type="ScrollContainer" parent="Panel"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Motion Sickness Settings"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+
+[node name="Sep0" type="HSeparator" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="FOVLabel" type="Label" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Field of View"
+theme_override_font_sizes/font_size = 13
+
+[node name="FOV" type="HBoxContainer" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Slider" type="HSlider" parent="Panel/Scroll/VBox/FOV"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 60.0
+max_value = 120.0
+step = 1.0
+value = 90.0
+
+[node name="Value" type="Label" parent="Panel/Scroll/VBox/FOV"]
+layout_mode = 2
+custom_minimum_size = Vector2(50, 0)
+text = "90°"
+
+[node name="HeadBobLabel" type="Label" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Head Bob"
+theme_override_font_sizes/font_size = 13
+
+[node name="HeadBob" type="HBoxContainer" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Option" type="OptionButton" parent="Panel/Scroll/VBox/HeadBob"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "Off"
+popup/item_1/text = "Subtle"
+popup/item_1/id = 1
+popup/item_2/text = "Aggressive"
+popup/item_2/id = 2
+
+[node name="MouseSmoothLabel" type="Label" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Mouse Smoothing"
+theme_override_font_sizes/font_size = 13
+
+[node name="MouseSmooth" type="HBoxContainer" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Option" type="OptionButton" parent="Panel/Scroll/VBox/MouseSmooth"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "Off"
+popup/item_1/text = "Low (3 frames)"
+popup/item_1/id = 1
+popup/item_2/text = "High (8 frames)"
+popup/item_2/id = 2
+
+[node name="Sep1" type="HSeparator" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="MotionBlurLabel" type="Label" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Motion Blur"
+theme_override_font_sizes/font_size = 13
+
+[node name="MotionBlur" type="HBoxContainer" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Option" type="OptionButton" parent="Panel/Scroll/VBox/MotionBlur"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "Off"
+popup/item_1/text = "Low"
+popup/item_1/id = 1
+popup/item_2/text = "High"
+popup/item_2/id = 2
+
+[node name="CALabel" type="Label" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Chromatic Aberration"
+theme_override_font_sizes/font_size = 13
+
+[node name="CA" type="HBoxContainer" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Check" type="CheckBox" parent="Panel/Scroll/VBox/CA"]
+layout_mode = 2
+text = "Enable"
+
+[node name="DOFLabel" type="Label" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Depth of Field"
+theme_override_font_sizes/font_size = 13
+
+[node name="DOF" type="HBoxContainer" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Option" type="OptionButton" parent="Panel/Scroll/VBox/DOF"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "Off"
+popup/item_1/text = "Subtle"
+popup/item_1/id = 1
+popup/item_2/text = "Aggressive"
+popup/item_2/id = 2
+
+[node name="Sep2" type="HSeparator" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="FPSCapLabel" type="Label" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Frame Rate Cap"
+theme_override_font_sizes/font_size = 13
+
+[node name="FPSCap" type="HBoxContainer" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Option" type="OptionButton" parent="Panel/Scroll/VBox/FPSCap"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 4
+popup/item_0/text = "Uncapped"
+popup/item_1/text = "60 FPS"
+popup/item_1/id = 1
+popup/item_2/text = "30 FPS"
+popup/item_2/id = 2
+popup/item_3/text = "Variable (20-60)"
+popup/item_3/id = 3
+
+[node name="FramePacingLabel" type="Label" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Frame Pacing"
+theme_override_font_sizes/font_size = 13
+
+[node name="FramePacing" type="HBoxContainer" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Option" type="OptionButton" parent="Panel/Scroll/VBox/FramePacing"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 2
+popup/item_0/text = "Consistent"
+popup/item_1/text = "Jittery"
+popup/item_1/id = 1
+
+[node name="Sep3" type="HSeparator" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Movement Speed"
+theme_override_font_sizes/font_size = 13
+
+[node name="Speed" type="HBoxContainer" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Option" type="OptionButton" parent="Panel/Scroll/VBox/Speed"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 1
+item_count = 3
+popup/item_0/text = "Slow (3.0)"
+popup/item_1/text = "Normal (5.5)"
+popup/item_1/id = 1
+popup/item_2/text = "Fast (10.0)"
+popup/item_2/id = 2
+
+[node name="AccelLabel" type="Label" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Acceleration"
+theme_override_font_sizes/font_size = 13
+
+[node name="Accel" type="HBoxContainer" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Option" type="OptionButton" parent="Panel/Scroll/VBox/Accel"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "Linear (Instant)"
+popup/item_1/text = "Smoothed"
+popup/item_1/id = 1
+popup/item_2/text = "Delayed"
+popup/item_2/id = 2
+
+[node name="RefPointLabel" type="Label" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Reference Point"
+theme_override_font_sizes/font_size = 13
+
+[node name="RefPoint" type="HBoxContainer" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Option" type="OptionButton" parent="Panel/Scroll/VBox/RefPoint"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "None"
+popup/item_1/text = "Weapon"
+popup/item_1/id = 1
+popup/item_2/text = "Body"
+popup/item_2/id = 2
+
+[node name="Sep4" type="HSeparator" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Reset All to Defaults"
+
+[node name="Sep5" type="HSeparator" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+
+[node name="DemoButton" type="Button" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Start Demo Loop"
+
+[node name="HintLabel" type="Label" parent="Panel/Scroll/VBox"]
+layout_mode = 2
+text = "Press Tab to toggle this panel"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 11
+modulate = Color(1, 1, 1, 0.5)
+
+[connection signal="value_changed" from="Panel/Scroll/VBox/FOV/Slider" to="." method="_on_fov_slider_value_changed"]
+[connection signal="item_selected" from="Panel/Scroll/VBox/HeadBob/Option" to="." method="_on_head_bob_option_item_selected"]
+[connection signal="item_selected" from="Panel/Scroll/VBox/MouseSmooth/Option" to="." method="_on_mouse_smooth_option_item_selected"]
+[connection signal="item_selected" from="Panel/Scroll/VBox/MotionBlur/Option" to="." method="_on_motion_blur_option_item_selected"]
+[connection signal="toggled" from="Panel/Scroll/VBox/CA/Check" to="." method="_on_ca_check_toggled"]
+[connection signal="item_selected" from="Panel/Scroll/VBox/DOF/Option" to="." method="_on_dof_option_item_selected"]
+[connection signal="item_selected" from="Panel/Scroll/VBox/FPSCap/Option" to="." method="_on_fps_cap_option_item_selected"]
+[connection signal="item_selected" from="Panel/Scroll/VBox/FramePacing/Option" to="." method="_on_frame_pacing_option_item_selected"]
+[connection signal="item_selected" from="Panel/Scroll/VBox/Speed/Option" to="." method="_on_speed_option_item_selected"]
+[connection signal="item_selected" from="Panel/Scroll/VBox/Accel/Option" to="." method="_on_accel_option_item_selected"]
+[connection signal="item_selected" from="Panel/Scroll/VBox/RefPoint/Option" to="." method="_on_ref_point_option_item_selected"]
+[connection signal="pressed" from="Panel/Scroll/VBox/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="Panel/Scroll/VBox/DemoButton" to="." method="_on_demo_button_pressed"]

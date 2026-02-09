@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cplayer001"]
+
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/player/camera_controller.gd" id="2_camera"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_001"]
+radius = 0.35
+height = 1.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_weapon"]
+size = Vector3(0.08, 0.08, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="Material_weapon"]
+albedo_color = Color(0.3, 0.3, 0.35, 1)
+metallic = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_body"]
+size = Vector3(0.3, 0.4, 0.15)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_001")
+
+[node name="HeadPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="HeadPivot"]
+script = ExtResource("2_camera")
+
+[node name="WeaponModel" type="MeshInstance3D" parent="HeadPivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.2, -0.4)
+visible = false
+mesh = SubResource("BoxMesh_weapon")
+surface_material_override/0 = SubResource("Material_weapon")
+
+[node name="BodyModel" type="MeshInstance3D" parent="HeadPivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.2)
+visible = false
+mesh = SubResource("BoxMesh_body")

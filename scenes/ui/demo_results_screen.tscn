@@ -1,0 +1,109 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdmoresult1"]
+
+[sub_resource type="GDScript" id="GDScript_results"]
+script/source = "extends CanvasLayer
+
+@onready var title_label: Label = $Background/Panel/VBox/TitleLabel
+@onready var step_label: Label = $Background/Panel/VBox/StepLabel
+@onready var time_label: Label = $Background/Panel/VBox/TimeLabel
+@onready var effects_label: Label = $Background/Panel/VBox/EffectsLabel
+@onready var close_button: Button = $Background/Panel/VBox/CloseButton
+
+signal closed
+
+func _ready() -> void:
+	visible = false
+	close_button.pressed.connect(_on_close_pressed)
+
+func show_results(step: int, total: int, elapsed: float, active_effects: Array) -> void:
+	visible = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+	if step >= total:
+		title_label.text = \"Congratulations! Demo Complete\"
+	else:
+		title_label.text = \"Demo Stopped\"
+
+	step_label.text = \"Reached step %d of %d\" % [step, total]
+
+	var mins := int(elapsed) / 60
+	var secs := int(elapsed) % 60
+	time_label.text = \"Elapsed: %d:%02d\" % [mins, secs]
+
+	if active_effects.is_empty():
+		effects_label.text = \"No effects were active.\"
+	else:
+		var lines := \"Active effects:\\n\"
+		for effect in active_effects:
+			lines += \"  - %s = %s\\n\" % [_format_setting_name(effect[\"setting\"]), str(effect[\"value\"])]
+		effects_label.text = lines.strip_edges()
+
+func _format_setting_name(setting: String) -> String:
+	return setting.replace(\"_\", \" \").capitalize()
+
+func _on_close_pressed() -> void:
+	visible = false
+	SettingsManager.reset_all()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	closed.emit()
+"
+
+[node name="DemoResultsScreen" type="CanvasLayer"]
+layer = 25
+script = SubResource("GDScript_results")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="Panel" type="PanelContainer" parent="Background"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -200.0
+offset_right = 250.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Background/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="Background/Panel/VBox"]
+layout_mode = 2
+text = "Demo Results"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 22
+
+[node name="Sep" type="HSeparator" parent="Background/Panel/VBox"]
+layout_mode = 2
+
+[node name="StepLabel" type="Label" parent="Background/Panel/VBox"]
+layout_mode = 2
+text = "Reached step 0 of 15"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 16
+
+[node name="TimeLabel" type="Label" parent="Background/Panel/VBox"]
+layout_mode = 2
+text = "Elapsed: 0:00"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 14
+
+[node name="EffectsLabel" type="Label" parent="Background/Panel/VBox"]
+layout_mode = 2
+text = "No effects were active."
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 2
+
+[node name="CloseButton" type="Button" parent="Background/Panel/VBox"]
+layout_mode = 2
+text = "Close & Reset"
